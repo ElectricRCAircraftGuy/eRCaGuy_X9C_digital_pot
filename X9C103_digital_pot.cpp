@@ -45,12 +45,12 @@ void X9C103::storeWiperPosition()
     // Ensure the proper time delay from the last call has elapsed, assuming rapid-fire
     // multiple calls to this function
     uint32_t t_now_ms = millis();
-    uint32_t t_delta_ms = t_now_ms - time_last_stored_ms;
+    uint32_t t_delta_ms = t_now_ms - _time_last_stored_ms;
     if (t_delta_ms < NON_VOLATILE_MEMORY_STORE_TIME_MS)
     {
         delay(t_delta_ms);
     }
-    time_last_stored_ms = t_now_ms;
+    _time_last_stored_ms = t_now_ms;
 
     // Store wiper position into non-volatile memory, per the datasheet
     digitalWrite(_INC_PIN, HIGH);
