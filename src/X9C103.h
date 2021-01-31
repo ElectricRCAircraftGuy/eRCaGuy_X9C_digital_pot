@@ -1,3 +1,6 @@
+#ifndef X9C103_h
+#define X9C103_h
+
 #pragma once
 
 #include <Arduino.h>
@@ -41,3 +44,5 @@ private:
     /// position commands are now possible.
     bool _is_indexed = false;
 }
+
+#endif
