@@ -8,8 +8,8 @@ public:
     /// \brief      Constructor
     /// \param[in]  cs_pin             Chip Select pin
     /// \param[in]  inc_pin            Increment pin
-    /// \param[out] up_down_pin        Up/Down pin
-    /// \param[out] reference_voltage  Vcc reference voltage--determines the max output voltage at
+    /// \param[in]  up_down_pin        Up/Down pin
+    /// \param[in]  reference_voltage  Vcc reference voltage--determines the max output voltage at
     ///                                the potentiometer's wiper
     /// \return     NA
     X9C_digital_pot(uint8_t cs_pin, uint8_t inc_pin, uint8_t up_down_pin,
