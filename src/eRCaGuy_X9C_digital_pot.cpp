@@ -1,7 +1,6 @@
 
 #include "eRCaGuy_X9C_digital_pot.h"
 
-
 #define TOGGLE_INC_PIN_HIGH_TO_LOW()  \
     do                                \
     {                                 \
@@ -9,7 +8,8 @@
         digitalWrite(_INC_PIN, LOW);  \
     } while (false)
 
-X9C_digital_pot::X9C_digital_pot(uint8_t cs_pin, uint8_t inc_pin, uint8_t up_down_pin, reference_voltage) :
+X9C_digital_pot::X9C_digital_pot(uint8_t cs_pin, uint8_t inc_pin, uint8_t up_down_pin,
+                                 reference_voltage) :
     _CS_PIN(cs_pin),
     _INC_PIN(inc_pin),
     _UP_DOWN_PIN(up_down_pin),
@@ -42,7 +42,7 @@ void X9C_digital_pot::wiperUp(uint8_t num_increments = 1)
         _wiper_pos++;
     }
 
-    deselectChip(); // also returns to standby since Inc pin is LOW
+    deselectChip();  // also returns to standby since Inc pin is LOW
 
     if (_wiper_pos > WIPER_MAXIMUM)
     {
@@ -70,7 +70,7 @@ void X9C_digital_pot::wiperDown(uint8_t num_decrements = 1)
         _wiper_pos--;
     }
 
-    deselectChip(); // also returns to standby since Inc pin is LOW
+    deselectChip();  // also returns to standby since Inc pin is LOW
 
     if (_wiper_pos < WIPER_MINIMUM)
     {
@@ -131,13 +131,11 @@ uint8_t X9C_digital_pot::getWiperPosition()
 /////////// TODO
 void X9C_digital_pot::setWiperVoltage(float volts)
 {
-
 }
 
 /////////// TODO
 float X9C_digital_pot::getWiperVoltage()
 {
-
 }
 
 void X9C_digital_pot::indexPosition(uint8_t position)
@@ -153,8 +151,8 @@ void X9C_digital_pot::indexPosition(uint8_t position)
     // set to commanded position to start; do NOT call `setWiperPosition()` here or else we will
     // engage in recursion, which is discouraged for low-memory embedded devices
 
-    // desired - actual; guaranteed to be zero or positive since `position` is constrained to 1 to 100
-    // and `_wiper_pos` is 1
+    // desired - actual; guaranteed to be zero or positive since `position` is constrained to 1 to
+    // 100 and `_wiper_pos` is 1
     int16_t delta = position - _wiper_pos;
     wiperUp(delta);
 }
@@ -186,4 +184,3 @@ void X9C_digital_pot::ensureStoreHasCompleted()
         _last_store_complete = true;
     }
 }
-
