@@ -8,11 +8,14 @@ public:
     /// Constructor
     X9C_digital_pot(uint8_t cs_pin, uint8_t inc_pin, uint8_t up_down_pin);
 
-    /// Move the wiper up the specified number of increments (default 1).
+    /// Move the wiper up the specified number of increments (default 1; allowed: 0 to 100).
     void wiperUp(uint8_t num_increments = 1);
 
-    /// Move the wiper down the specified number of increments (default 1).
+    /// Move the wiper down the specified number of increments (default 1; allowed: 0 to 100).
     void wiperDown(uint8_t num_decrements = 1);
+
+    /// Return to standby; do NOT store the current wiper position into non-volatile memory
+    void standBy();
 
     /// Store the current wiper position into non-volatile memory.
     void storeWiperPosition();
@@ -20,16 +23,16 @@ public:
     /// Set an absolute wiper position from 1 to 100 (default middle (50)).
     void setWiperPosition(uint8_t position = 50);
 
-    /// Calibrate (index) the absolute position and go to the specified position (default to the
+    /// Calibrate (index) the absolute position and go to the specified position from 1 to 100 (default to the
     /// middle position (50))
     void indexPosition(uint8_t position = 50);
 
     /// How long you must wait for the non-volatile memory to get stored (from the datasheet:
     /// `t_CPH`)
-    static constexpr uint8_t NON_VOLATILE_MEMORY_STORE_TIME_MS = 20;
+    static constexpr uint8_t NON_VOLATILE_MEMORY_STORE_TIME_MS = 20 + 1; // + 1 for good measure
     /// Minimum absolute wiper position allowed
     static constexpr int16_t WIPER_MINIMUM = 1;
-    /// Maximum absolute wiper position allowed
+    /// Maximum absolute wiper position allowed; also equal to the total number of wiper positions, since it is 1-indexed
     static constexpr int16_t WIPER_MAXIMUM =  100;
 
 private:
@@ -40,6 +43,10 @@ private:
 
     /// Deselect the chip
     void deselectChip();
+
+    /// Ensure proper store time has elapsed for any pending store operation BEFORE allowing Inc OR CS pins to go LOW again.
+    /// See the "AC Timing Diagram" in the datasheet on p6--in particular the t_CPH variable.
+    void ensureStoreHasCompleted();
 
 
     /// timestamp of the start of the last store attempt of the the wiper position into non-volatile memory;
