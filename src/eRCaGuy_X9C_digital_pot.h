@@ -33,8 +33,20 @@ public:
     static constexpr int16_t WIPER_MAXIMUM =  100;
 
 private:
-    /// timestamp of the last time the wiper position was stored into non-volatile memory
-    uint32_t _time_last_stored_ms = 0 - NON_VOLATILE_MEMORY_STORE_TIME_MS;  // intentional underflow
+    /// Select the chip, ensuring that the proper store time has elapsed FIRST BEFORE the
+    /// chip select operation is allowed, as selecting the chip too soon will cancel a recent
+    /// non-volatile store attempt, according to the "AC Timing Diagram" in the datasheet.
+    void selectChip();
+
+    /// Deselect the chip
+    void deselectChip();
+
+
+    /// timestamp of the start of the last store attempt of the the wiper position into non-volatile memory;
+    /// initialize with intentional underflow so it will appear the full time has elapsed the very first call
+    uint32_t _time_last_store_started_ms = 0 - NON_VOLATILE_MEMORY_STORE_TIME_MS;
+    /// set to true once we are sure the last store operation is complete
+    bool _last_store_complete = false;
 
     /// Chip Select pin
     const uint8_t _CS_PIN;
