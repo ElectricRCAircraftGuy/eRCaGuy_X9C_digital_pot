@@ -1,5 +1,5 @@
 
-#include "X9C103_digital_pot.h"
+#include "eRCaGuy_X9C_digital_pot.h"
 
 
 #define SELECT_CHIP() digitalWrite(_CS_PIN, LOW)
