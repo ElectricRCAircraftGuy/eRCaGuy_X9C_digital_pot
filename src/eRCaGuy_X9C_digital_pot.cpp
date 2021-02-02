@@ -11,7 +11,7 @@
         digitalWrite(_INC_PIN, LOW);  \
     } while (false)
 
-X9C103::X9C103(uint8_t cs_pin, uint8_t inc_pin, uint8_t up_down_pin) :
+X9C_digital_pot::X9C_digital_pot(uint8_t cs_pin, uint8_t inc_pin, uint8_t up_down_pin) :
     _CS_PIN(cs_pin),
     _INC_PIN(inc_pin),
     _UP_DOWN_PIN(up_down_pin)
@@ -21,25 +21,31 @@ X9C103::X9C103(uint8_t cs_pin, uint8_t inc_pin, uint8_t up_down_pin) :
     pinMode(_UP_DOWN_PIN, OUTPUT);
 }
 
-void X9C103::wiperUp()
+void X9C_digital_pot::wiperUp(uint8_t num_increments = 1)
 {
     SELECT_CHIP();
     digitalWrite(_UP_DOWN_PIN, HIGH);
     TOGGLE_INC_PIN_HIGH_TO_LOW();
     DESELECT_CHIP();
-    _wiper_pos++;
+    _wiper_pos += num_increments;
+    if (_wiper_pos > WIPER_MAXIMUM) {
+        _wiper_pos = WIPER_MAXIMUM;
+    }
 }
 
-void X9C103::wiperDown()
+void X9C_digital_pot::wiperDown(uint8_t num_decrements = 1)
 {
     SELECT_CHIP();
     digitalWrite(_UP_DOWN_PIN, LOW);
     TOGGLE_INC_PIN_HIGH_TO_LOW();
     DESELECT_CHIP();
-    _wiper_pos--;
+    _wiper_pos -= num_decrements;
+    if (_wiper_pos < WIPER_MINIMUM) {
+        _wiper_pos = WIPER_MINIMUM;
+    }
 }
 
-void X9C103::storeWiperPosition()
+void X9C_digital_pot::storeWiperPosition()
 {
     // Ensure the proper time delay from the last call has elapsed, assuming rapid-fire
     // multiple calls to this function
@@ -51,13 +57,13 @@ void X9C103::storeWiperPosition()
     }
     _time_last_stored_ms = t_now_ms;
 
-    // Store wiper position into non-volatile memory, per the datasheet
+    // Store wiper position into non-volatile memory, per the datasheet "Mode Selection" table on p7
     digitalWrite(_INC_PIN, HIGH);
     SELECT_CHIP();
     DESELECT_CHIP();
 }
 
-void X9C103::setWiperPosition(uint8_t position)
+void X9C_digital_pot::setWiperPosition(uint8_t position)
 {
     if (!_is_indexed)
     {
@@ -83,7 +89,7 @@ void X9C103::setWiperPosition(uint8_t position)
     }
 }
 
-void X9C103::indexPosition()
+void X9C_digital_pot::indexPosition()
 {
     // The pot only has 100 increments (see Datasheet p1: "100 Wiper Tap Points"), so we can
     // guarantee that the lowest position (1 of 100) is reached simply by going down 100 counts.
