@@ -9,10 +9,11 @@
         digitalWrite(_INC_PIN, LOW);  \
     } while (false)
 
-X9C_digital_pot::X9C_digital_pot(uint8_t cs_pin, uint8_t inc_pin, uint8_t up_down_pin) :
+X9C_digital_pot::X9C_digital_pot(uint8_t cs_pin, uint8_t inc_pin, uint8_t up_down_pin, reference_voltage) :
     _CS_PIN(cs_pin),
     _INC_PIN(inc_pin),
-    _UP_DOWN_PIN(up_down_pin)
+    _UP_DOWN_PIN(up_down_pin),
+    _REFERENCE_VOLTAGE(reference_voltage)
 {
     pinMode(_CS_PIN, OUTPUT);
     pinMode(_INC_PIN, OUTPUT);
@@ -105,7 +106,8 @@ void X9C_digital_pot::setWiperPosition(uint8_t position)
 
     if (!_is_indexed)
     {
-        indexPosition();
+        indexPosition(position);
+        return;
     }
 
     int16_t delta = position - _wiper_pos;  // desired - actual
@@ -119,6 +121,23 @@ void X9C_digital_pot::setWiperPosition(uint8_t position)
         delta = -delta;
         wiperDown(delta);
     }
+}
+
+uint8_t X9C_digital_pot::getWiperPosition()
+{
+    return (uint8_t)_wiper_pos;
+}
+
+/////////// TODO
+void X9C_digital_pot::setWiperVoltage(float volts)
+{
+
+}
+
+/////////// TODO
+float X9C_digital_pot::getWiperVoltage()
+{
+
 }
 
 void X9C_digital_pot::indexPosition(uint8_t position)

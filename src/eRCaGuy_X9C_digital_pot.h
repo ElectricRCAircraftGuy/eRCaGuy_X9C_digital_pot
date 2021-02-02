@@ -5,8 +5,14 @@
 class X9C_digital_pot
 {
 public:
-    /// Constructor
-    X9C_digital_pot(uint8_t cs_pin, uint8_t inc_pin, uint8_t up_down_pin);
+    /// \brief      Constructor
+    /// \param[in]  cs_pin             Chip Select pin
+    /// \param[in]  inc_pin            Increment pin
+    /// \param[out] up_down_pin        Up/Down pin
+    /// \param[out] reference_voltage  Vcc reference voltage--determines the max output voltage at
+    ///                                the potentiometer's wiper
+    /// \return     NA
+    X9C_digital_pot(uint8_t cs_pin, uint8_t inc_pin, uint8_t up_down_pin, float reference_voltage = 5.0);
 
     /// Move the wiper up the specified number of increments (default 1; allowed: 0 to 100).
     void wiperUp(uint8_t num_increments = 1);
@@ -22,6 +28,16 @@ public:
 
     /// Set an absolute wiper position from 1 to 100 (default middle (50)).
     void setWiperPosition(uint8_t position = 50);
+
+    /// Get the current wiper position, from 1 to 100. Will NOT be a valid value if `setWiperPosition()` or `indexPosition()`
+    /// has not been called at least once PRIOR to this call.
+    uint8_t getWiperPosition();
+
+    /// Set the proper wiper position setting to obtain this desired voltage at the wiper; this is an open-loop command.
+    void setWiperVoltage(float volts);
+
+    /// Get the commanded voltage at the wiper based on the last commanded wiper position.
+    float getWiperVoltage();
 
     /// Calibrate (index) the absolute position and go to the specified position from 1 to 100 (default to the
     /// middle position (50))
@@ -61,6 +77,9 @@ private:
     const uint8_t _INC_PIN;
     /// Up/Down selection pin (affects which direction the Inc pin works)
     const uint8_t _UP_DOWN_PIN;
+    /// The reference voltage, Vcc. At the max potentiometer setting this is the output voltage
+    /// at the wiper
+    const float _REFERENCE_VOLTAGE;
 
     /// Current absolute wiper position (1 to 100); use signed 16-bit value to allow for proper
     /// math in the library
