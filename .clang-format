@@ -75,7 +75,7 @@ AlignEscapedNewlines: Left
 AlignOperands:   true
 AlignTrailingComments: true
 # AllowAllArgumentsOnNextLine: false
-# AllowAllConstructorInitializersOnNextLine : false
+AllowAllConstructorInitializersOnNextLine : false
 AllowAllParametersOfDeclarationOnNextLine: false
 AllowShortBlocksOnASingleLine: false # Empty <== use on later clang-format versions
 AllowShortCaseLabelsOnASingleLine: false

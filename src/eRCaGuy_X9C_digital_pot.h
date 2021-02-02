@@ -4,7 +4,7 @@
 
 class X9C103
 {
-public:
+  public:
     /// Constructor
     X9C103(uint8_t cs_pin, uint8_t inc_pin, uint8_t up_down_pin);
 
@@ -28,15 +28,17 @@ public:
     /// Minimum absolute wiper position allowed
     static constexpr int16_t WIPER_MINIMUM = 1;
     /// Maximum absolute wiper position allowed
-    static constexpr int16_t WIPER_MAXIMUM = 100; /////////// add code to constrain and prevent over/underflows!
+    static constexpr int16_t WIPER_MAXIMUM =
+        100;  /////////// add code to constrain and prevent over/underflows!
 
-private:
+  private:
     /// timestamp of the last time the wiper position was stored into non-volatile memory
     uint32_t _time_last_stored_ms = 0 - NON_VOLATILE_MEMORY_STORE_TIME_MS;
 
-    const uint8_t _CS_PIN; // Chip Select pin
-    const uint8_t _INC_PIN; // Incremement/Decrement pin
-    const uint8_t _UP_DOWN_PIN; // Up/Down selection pin (affects which direction the Inc pin works)
+    const uint8_t _CS_PIN;   // Chip Select pin
+    const uint8_t _INC_PIN;  // Incremement/Decrement pin
+    const uint8_t
+        _UP_DOWN_PIN;  // Up/Down selection pin (affects which direction the Inc pin works)
 
     /// Current absolute wiper position (1 to 100)
     uint8_t _wiper_pos = 0;
