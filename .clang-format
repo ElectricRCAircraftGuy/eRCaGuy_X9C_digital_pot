@@ -66,7 +66,7 @@
 Language:        Cpp
 # BasedOnStyle:  Google (with heavy modifications, the biggest one being setting braces to
 # `BreakBeforeBraces: Allman`)
-AccessModifierOffset: -2
+AccessModifierOffset: -4
 AlignAfterOpenBracket: Align
 AlignConsecutiveAssignments: false
 AlignConsecutiveDeclarations: false
