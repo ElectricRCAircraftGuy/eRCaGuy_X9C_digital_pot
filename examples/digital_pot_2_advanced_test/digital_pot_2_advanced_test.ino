@@ -1,7 +1,7 @@
 /*
 Gabriel Staples
 
-Basic demo of this library.
+Advanced demo of this library.
 
 Circuit:
 X9C IC Pin  Arduino Pin   Description
