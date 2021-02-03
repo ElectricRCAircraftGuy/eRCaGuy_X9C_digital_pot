@@ -22,6 +22,11 @@ Examples are written. Please take a look, try them out, and see if they work!
 MIT
 
 
+# Screenshots
+
+![](extras/pics/advanced_test_serial_monitor_screenshot.jpg)
+
+
 # Notes to self
 - Reminder to follow this specification, folder layout, and to have a library.properties file or else Arduino won't accept and build your library! https://arduino.github.io/arduino-cli/latest/library-specification/ /////////////////////
 
