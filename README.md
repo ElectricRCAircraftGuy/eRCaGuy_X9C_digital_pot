@@ -9,6 +9,13 @@ https://gabrielstaples.com
 www.ElectricRCAircraftGuy.com  
 
 
+# Library Notes
+
+This library works on any and all Arduino or Arduino-compatible boards. Set these pins passed to the `X9C_digital_pot` class constructor to any `digitalWrite()`-capable pin number for your board as you see fit. 
+
+**For the ATMega168/ATmega328-based boards**, such as the **Uno/Nano/Mini**, using pins `0` and `1`, however, is generally NOT recommended, as they are for serial communication to upload your program. Therefore, I recommend Digital pins `2` through `13`, inclusive, or Analog pins `A0` through `A5`, inclusive. NB: If your ATmega168/328-based board has an `A6` or `A7` pin, these pins do NOT support `digitalWrite()`/`digitalRead()` like other analog pins! Rather, `A6` and `A7` can do `analogRead()` only.
+
+
 # Status
 
 Library is done. It is complete and thorough, and it compiles and runs on an Arduino. 

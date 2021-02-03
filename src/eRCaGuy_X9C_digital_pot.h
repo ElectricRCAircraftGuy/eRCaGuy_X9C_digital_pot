@@ -6,6 +6,7 @@ class X9C_digital_pot
 {
 public:
     /// \brief      Constructor
+    /// \details    You can use any `digitalWrite()`-capable pin for all 3 of the pins below!
     /// \param[in]  cs_pin              Chip Select pin
     /// \param[in]  inc_pin             Increment pin
     /// \param[in]  up_down_pin         Up/Down pin
