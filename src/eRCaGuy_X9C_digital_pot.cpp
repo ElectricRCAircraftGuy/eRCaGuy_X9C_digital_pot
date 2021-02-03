@@ -22,7 +22,7 @@ X9C_digital_pot::X9C_digital_pot(uint8_t cs_pin, uint8_t inc_pin, uint8_t up_dow
     standBy();
 }
 
-void X9C_digital_pot::wiperUp(uint8_t num_increments = 1)
+void X9C_digital_pot::wiperUp(uint8_t num_increments)
 {
     if (num_increments == 0)
     {
@@ -50,9 +50,9 @@ void X9C_digital_pot::wiperUp(uint8_t num_increments = 1)
     }
 }
 
-void X9C_digital_pot::wiperDown(uint8_t num_decrements = 1)
+void X9C_digital_pot::wiperDown(uint8_t num_decrements)
 {
-    if (num_increments == 0)
+    if (num_decrements == 0)
     {
         return;
     }
@@ -160,7 +160,7 @@ void X9C_digital_pot::indexPosition(uint8_t position)
     wiperUp(delta);
 }
 
-// ----------------- PRIVATE ----------------
+// ----------------- PRIVATE -------------------
 
 void X9C_digital_pot::selectChip()
 {
