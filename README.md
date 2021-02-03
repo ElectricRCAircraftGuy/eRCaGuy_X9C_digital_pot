@@ -32,4 +32,7 @@ _This library layout and structure conforms with the [Arduino Library specificat
 
 
 # TODO (delete when done--newest on bottom)
-1. 
+1. Write blog posts:
+    1. How to make an Arduino library (focus on the mechanics and library specification, not really the code itself).
+    1. Introducing this library briefly.
+    1. Also do a [PPM library](https://github.com/ElectricRCAircraftGuy/eRCaGuy_PPM_Writer) intro while at it too.
