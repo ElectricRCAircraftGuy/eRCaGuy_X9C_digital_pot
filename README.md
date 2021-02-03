@@ -2,7 +2,7 @@
 
 Arduino library/driver for the Renesas X9C102 (1k), X9C103 (10k), X9C503 (50k), and X9C104 (100k) family of digital potentiometers.
 
-Easily drive these 100-step digital potentiometers to any absolute or relative position.
+Easily drive these 100-step digital potentiometers to any absolute or relative position or voltage.
 
 By Gabriel Staples  
 https://gabrielstaples.com  
