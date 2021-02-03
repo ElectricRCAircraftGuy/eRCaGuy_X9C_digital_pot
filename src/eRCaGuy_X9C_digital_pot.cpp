@@ -131,13 +131,15 @@ uint8_t X9C_digital_pot::getWiperPosition()
 void X9C_digital_pot::setWiperVoltage(float volts)
 {
     volts = constrain(volts, 0, _WIPER_HIGH_VOLTAGE);
-    uint8_t wiper_cmd = round(volts/_WIPER_HIGH_VOLTAGE*(WIPER_MAXIMUM - WIPER_MINIMUM) + WIPER_MINIMUM);
+    uint8_t wiper_cmd =
+        round(volts / _WIPER_HIGH_VOLTAGE * (WIPER_MAXIMUM - WIPER_MINIMUM) + WIPER_MINIMUM);
     setWiperPosition(wiper_cmd);
 }
 
 float X9C_digital_pot::getWiperCommandedVoltage()
 {
-    float cmd_voltage = (float)(_wiper_pos - WIPER_MINIMUM)/(WIPER_MAXIMUM - WIPER_MINIMUM)*_WIPER_HIGH_VOLTAGE;
+    float cmd_voltage =
+        (float)(_wiper_pos - WIPER_MINIMUM) / (WIPER_MAXIMUM - WIPER_MINIMUM) * _WIPER_HIGH_VOLTAGE;
     return cmd_voltage;
 }
 

@@ -28,10 +28,9 @@ X9C_digital_pot pot(CS_PIN, INC_PIN, UP_DOWN_PIN);
 
 void setup()
 {
-
-    // TODO: Cycle through wiper outputs with uint8_t **absolute commands** incrementing and overflowing
-    // absolute commands 1000x first to ensure indexing doesn't get out-of-sync, then allow the user
-    // to run and test output voltages!
+    // TODO: Cycle through wiper outputs with uint8_t **absolute commands** incrementing and
+    // overflowing absolute commands 1000x first to ensure indexing doesn't get out-of-sync, then
+    // allow the user to run and test output voltages!
 }
 
 void loop()
