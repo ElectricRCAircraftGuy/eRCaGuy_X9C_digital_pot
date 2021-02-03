@@ -6,14 +6,15 @@ class X9C_digital_pot
 {
 public:
     /// \brief      Constructor
-    /// \param[in]  cs_pin             Chip Select pin
-    /// \param[in]  inc_pin            Increment pin
-    /// \param[in]  up_down_pin        Up/Down pin
-    /// \param[in]  reference_voltage  Vcc reference voltage--determines the max output voltage at
-    ///                                the potentiometer's wiper
+    /// \param[in]  cs_pin              Chip Select pin
+    /// \param[in]  inc_pin             Increment pin
+    /// \param[in]  up_down_pin         Up/Down pin
+    /// \param[in]  wiper_high_voltage  V_H, or high reference voltage going into the high side of
+    ///                                 the digital potentiometer. This is the max possible output
+    ///                                 voltage at the potentiometer's wiper.
     /// \return     NA
     X9C_digital_pot(uint8_t cs_pin, uint8_t inc_pin, uint8_t up_down_pin,
-                    float reference_voltage = 5.0);
+                    float wiper_high_voltage = 5.0);
 
     /// Move the wiper up the specified number of increments (default 1; allowed: 0 to 100).
     void wiperUp(uint8_t num_increments = 1);
@@ -40,7 +41,7 @@ public:
     void setWiperVoltage(float volts);
 
     /// Get the commanded voltage at the wiper based on the last commanded wiper position.
-    float getWiperVoltage();
+    float getWiperCommandedVoltage();
 
     /// Calibrate (index) the absolute position and go to the specified position from 1 to 100
     /// (default to the middle position (50))
@@ -84,7 +85,7 @@ private:
     const uint8_t _UP_DOWN_PIN;
     /// The reference voltage, Vcc. At the max potentiometer setting this is the output voltage
     /// at the wiper
-    const float _REFERENCE_VOLTAGE;
+    const float _WIPER_HIGH_VOLTAGE;
 
     /// Current absolute wiper position (1 to 100); use signed 16-bit value to allow for proper
     /// math in the library

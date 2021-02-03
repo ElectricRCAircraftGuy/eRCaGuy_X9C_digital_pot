@@ -9,11 +9,11 @@
     } while (false)
 
 X9C_digital_pot::X9C_digital_pot(uint8_t cs_pin, uint8_t inc_pin, uint8_t up_down_pin,
-                                 reference_voltage) :
+                                 float wiper_high_voltage) :
     _CS_PIN(cs_pin),
     _INC_PIN(inc_pin),
     _UP_DOWN_PIN(up_down_pin),
-    _REFERENCE_VOLTAGE(reference_voltage)
+    _WIPER_HIGH_VOLTAGE(wiper_high_voltage)
 {
     pinMode(_CS_PIN, OUTPUT);
     pinMode(_INC_PIN, OUTPUT);
@@ -128,14 +128,17 @@ uint8_t X9C_digital_pot::getWiperPosition()
     return (uint8_t)_wiper_pos;
 }
 
-/////////// TODO
 void X9C_digital_pot::setWiperVoltage(float volts)
 {
+    volts = constrain(volts, 0, _WIPER_HIGH_VOLTAGE);
+    uint8_t wiper_cmd = round(volts/_WIPER_HIGH_VOLTAGE*(WIPER_MAXIMUM - WIPER_MINIMUM) + WIPER_MINIMUM);
+    setWiperPosition(wiper_cmd);
 }
 
-/////////// TODO
-float X9C_digital_pot::getWiperVoltage()
+float X9C_digital_pot::getWiperCommandedVoltage()
 {
+    float cmd_voltage = (float)(_wiper_pos - WIPER_MINIMUM)/(WIPER_MAXIMUM - WIPER_MINIMUM)*_WIPER_HIGH_VOLTAGE;
+    return cmd_voltage;
 }
 
 void X9C_digital_pot::indexPosition(uint8_t position)
