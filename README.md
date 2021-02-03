@@ -11,14 +11,18 @@ www.ElectricRCAircraftGuy.com
 
 # Status
 
-work-in-progress
+Library complete and thorough, and it compiles and runs on an Arduino. 
+
+However, it is untested with an actual X9C103 digital potentiometer, as I'm still waiting on it to arrive in the mail. 
+
+Example are written. Try them out and see if they work!
 
 
 # License
 MIT
 
 
-# Notes
+# Notes to self
 - Reminder to follow this specification, folder layout, and to have a library.properties file or else Arduino won't accept and build your library! https://arduino.github.io/arduino-cli/latest/library-specification/ /////////////////////
 
 WRITE BLOG POST ON ARDUINO LIBRARY FOLDER LAYOUT, THE ERROR MESSAGE, ETC.
