@@ -28,4 +28,4 @@ _This library layout and structure conforms with the [Arduino Library specificat
 
 
 # TODO (delete when done--newest on bottom)
-1. Add cmd to allow stepping any number of steps.
+1. 
