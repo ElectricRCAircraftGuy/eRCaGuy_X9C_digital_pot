@@ -11,11 +11,11 @@ www.ElectricRCAircraftGuy.com
 
 # Status
 
-Library complete and thorough, and it compiles and runs on an Arduino. 
+Library is done. It is complete and thorough, and it compiles and runs on an Arduino. 
 
-However, it is untested with an actual X9C103 digital potentiometer, as I'm still waiting on it to arrive in the mail. 
+However, it is untested with **actual X9C103 digital potentiometer hardware**, as I'm still waiting on it to arrive in the mail. 
 
-Example are written. Try them out and see if they work!
+Examples are written. Please take a look, try them out, and see if they work!
 
 
 # License

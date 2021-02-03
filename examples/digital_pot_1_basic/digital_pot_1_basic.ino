@@ -28,6 +28,8 @@ X9C_digital_pot pot(CS_PIN, INC_PIN, UP_DOWN_PIN);
 
 void setup()
 {
+    Serial.begin(115200);
+
     pot.setWiperVoltage(2.5);
     uint8_t wiper_position = pot.getWiperPosition();
 
@@ -37,6 +39,8 @@ void setup()
     pot.setWiperPosition(wiper_position);
 
     float wiper_voltage = pot.getWiperCommandedVoltage();
+    Serial.print(F("Commanded output voltage = "));
+    Serial.println(wiper_voltage);
 }
 
 void loop()

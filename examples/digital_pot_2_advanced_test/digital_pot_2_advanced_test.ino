@@ -24,7 +24,11 @@ constexpr uint8_t CS_PIN = 2;
 constexpr uint8_t INC_PIN = 3;
 constexpr uint8_t UP_DOWN_PIN = 4;
 
-X9C_digital_pot pot(CS_PIN, INC_PIN, UP_DOWN_PIN);
+// Calibrate this! Measure the actual voltage at the potentiometer's VH pin with a multimeter and
+// change this value to that value to calibrate the commanded voltage value at the wiper!
+constexpr float WIPER_HIGH_VOLTAGE = 5.0;
+
+X9C_digital_pot pot(CS_PIN, INC_PIN, UP_DOWN_PIN, WIPER_HIGH_VOLTAGE);
 
 void setup()
 {
@@ -37,19 +41,36 @@ void setup()
     Serial.print(F("wiper_position = "));
     Serial.println(wiper_position);
     Serial.println();
-
+    Serial.println(
+        F("Delaying 5 seconds to let you verify the output voltage with a multimeter..."));
     delay(5000);
+
+    // Now cycle through the wiper outputs with uint8_t **absolute commands** incrementing and
+    // overflowing many many times to ensure indexing doesn't get out-of-sync inside the chip.
+    // The user should measure the output voltages before and after this point with a multimeter
+    // to see if they are accurate.
+    constexpr uint32_t NUM_CMDS = 256 * 1000UL;
+    Serial.print(F("Running "));
+    Serial.print(NUM_CMDS);
+    Serial.println(F(" potentiometer wiper commands as fast as possible."));
+    for (uint32_t i = 0; i < NUM_CMDS; i++)
+    {
+        static uint8_t wiper_cmd = 0;
+        pot.setWiperPosition(wiper_cmd);
+        wiper_cmd++;
+    }
 }
 
 void loop()
 {
-    static uint8_t wiper_position_cmd = pot.getWiperPosition();
+    static uint8_t wiper_position_cmd = 0;
 
     Serial.print(F("Commanding wiper position to "));
     Serial.print(wiper_position_cmd);
 
     pot.setWiperPosition(wiper_position_cmd);
     wiper_position_cmd++;
+    wiper_position_cmd = wiper_position_cmd % 110;  // wrap around at 110 just for kicks
 
     uint8_t wiper_position_actual = pot.getWiperPosition();
     float commanded_voltage = pot.getWiperCommandedVoltage();
@@ -60,7 +81,7 @@ void loop()
     Serial.print(commanded_voltage);
     Serial.println(F(" V."));
 
-    delay(2000);
+    delay(3000);  // give the user time to measure and verify each output voltage with a multimeter
 }
 
 /*
