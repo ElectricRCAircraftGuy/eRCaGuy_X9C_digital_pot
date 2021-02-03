@@ -24,7 +24,7 @@ MIT
 
 # Screenshots
 
-![](extras/pics/advanced_test_serial_monitor_screenshot.jpg)
+[![](extras/pics/advanced_test_serial_monitor_screenshot.jpg)](extras/pics/advanced_test_serial_monitor_screenshot.jpg)
 
 
 # Notes to self
