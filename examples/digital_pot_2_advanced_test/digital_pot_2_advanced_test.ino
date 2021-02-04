@@ -54,8 +54,12 @@ void setup()
     // Now cycle through the wiper outputs with uint8_t **absolute commands** incrementing and
     // overflowing many many times to ensure indexing doesn't get out-of-sync inside the chip.
     // The user should measure the output voltages before and after this point with a multimeter
-    // to see if they are accurate.
-    constexpr uint32_t NUM_CMDS = 256 * 1000UL;
+    // to see if they are accurate. Note: choose a large prime number to try to eliminate the
+    // possibility of even, periodic, or repeated numbers of errors, if errors exist, canceling each
+    // other out.
+    // Prime number chosen from here: https://www.mathsisfun.com/numbers/prime-numbers-to-10k.html
+    constexpr uint32_t LARGE_PRIME = 1087UL;
+    constexpr uint32_t NUM_CMDS = 256UL * LARGE_PRIME;
     Serial.print(F("Running "));
     Serial.print(NUM_CMDS);
     Serial.println(F(" potentiometer wiper commands as fast as possible."));
