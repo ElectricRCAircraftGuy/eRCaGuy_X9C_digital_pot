@@ -3,10 +3,9 @@ Gabriel Staples
 
 Multiple potentiometer demo of this library.
 
-Let's imagine we have potentiometers which control a
-radio-controlled (RC) vehicle somehow by replacing the control sticks of the controller, for
-instance. Let's imagine it's an RC car with one digital potentiometer for throttle and one for
-steering.
+Let's imagine we have potentiometers which control a radio-controlled (RC) vehicle somehow by
+replacing the control sticks of the controller, for instance. Let's imagine it's an RC car with one
+digital potentiometer for throttle and one for steering.
 
 Circuit for each digital potentiometer:
 X9C IC Pin  Arduino Pin   Description
