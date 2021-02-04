@@ -22,6 +22,11 @@ X9C_digital_pot::X9C_digital_pot(uint8_t cs_pin, uint8_t inc_pin, uint8_t up_dow
     standBy();
 }
 
+X9C_digital_pot::X9C_digital_pot(Pins pins, float wiper_high_voltage) :
+    X9C_digital_pot(pins.cs_pin, pins.inc_pin, pins.up_down_pin, wiper_high_voltage)
+{
+}
+
 void X9C_digital_pot::wiperUp(uint8_t num_increments)
 {
     if (num_increments == 0)

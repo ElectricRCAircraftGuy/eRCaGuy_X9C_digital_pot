@@ -5,6 +5,15 @@
 class X9C_digital_pot
 {
 public:
+    /// Hardware pins to control a digital potentiometer.
+    /// Note: see pin descriptions below.
+    struct Pins
+    {
+        uint8_t cs_pin;
+        uint8_t inc_pin;
+        uint8_t up_down_pin;
+    };
+
     /// \brief      Constructor
     /// \details    You can use any `digitalWrite()`-capable pin for all 3 of the pins below!
     /// \param[in]  cs_pin              Chip Select pin
@@ -16,6 +25,9 @@ public:
     /// \return     NA
     X9C_digital_pot(uint8_t cs_pin, uint8_t inc_pin, uint8_t up_down_pin,
                     float wiper_high_voltage = 5.0);
+
+    /// Alternate constructor, using the `Pins` struct.
+    X9C_digital_pot(Pins pins, float wiper_high_voltage = 5.0);
 
     /// Move the wiper up the specified number of increments (default 1; allowed: 0 to 100).
     void wiperUp(uint8_t num_increments = 1);

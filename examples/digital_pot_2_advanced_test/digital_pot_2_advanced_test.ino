@@ -6,12 +6,12 @@ Advanced demo of this library.
 Circuit:
 X9C IC Pin  Arduino Pin   Description
 ----------  -----------   -----------
-Inc         See code      Increment
-U/D         See code      Up/Down selection
+Inc         Set in code   Increment
+U/D         Set in code   Up/Down selection
 VH          5V            Potentiometer High side input
 Vss         GND           IC GND
 Vcc         5V            IC Power
-CS          See code      Chip Select
+CS          Set in code   Chip Select
 VL          GND           Potentiometer Low side (GND)
 Vw          -             Wiper output---this is your output voltage signal to control
                           whatever you want!
