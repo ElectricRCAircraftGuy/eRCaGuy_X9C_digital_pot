@@ -26,12 +26,12 @@ Vw          -             Wiper output---this is your output voltage signal to c
 #include <eRCaGuy_X9C_digital_pot.h>
 
 // Adjust or reverse these as necessary for your setup
-#define THROTTLE_UP()  throttle.wiperUp()
+#define THROTTLE_UP() throttle.wiperUp()
 #define THROTTLE_DOWN() throttle.wiperDown()
 #define THROTTLE_SET(val) throttle.setWiperPosition(val)
 
 // Adjust or reverse these as necessary for your setup
-#define STEER_LEFT()  steering.wiperUp()
+#define STEER_LEFT() steering.wiperUp()
 #define STEER_RIGHT() steering.wiperDown()
 #define STEERING_SET(val) steering.setWiperPosition(val)
 
@@ -41,14 +41,12 @@ Vw          -             Wiper output---this is your output voltage signal to c
 // Uno/Nano/Pro Mini type ATmega328-based boards, I recommend Digital pins 2 through 13, inclusive,
 // or Analog pins A0 through A5, inclusive. NB: If your ATmega168/328-based board has an A6 or A7
 // pin, these pins do NOT support `digitalWrite()`/`digitalRead()`!
-constexpr X9C_digital_pot::Pins THROTTLE_POT_PINS =
-{
+constexpr X9C_digital_pot::Pins THROTTLE_POT_PINS = {
     .cs_pin = 10,
     .inc_pin = 4,
     .up_down_pin = 5,
 };
-constexpr X9C_digital_pot::Pins STEERING_POT_PINS =
-{
+constexpr X9C_digital_pot::Pins STEERING_POT_PINS = {
     .cs_pin = 11,
     .inc_pin = A0,
     .up_down_pin = A1,
@@ -67,11 +65,13 @@ void setup()
 
     THROTTLE_UP();
     THROTTLE_DOWN();
-    THROTTLE_SET(50); // 1 to 100
+    THROTTLE_SET(50);  // 1 to 100, where 50 is center, and 1 is either 0% throttle or full
+                       // throttle, and 100 is the opposite
 
     STEER_LEFT();
     STEER_RIGHT();
-    STEERING_SET(75); // 1 to 100, where 50 is center, and 1 is either full left or full right, and 100 is the opposite
+    STEERING_SET(75);  // 1 to 100, where 50 is center, and 1 is either full left or full right, and
+                       // 100 is the opposite
 }
 
 void loop()
