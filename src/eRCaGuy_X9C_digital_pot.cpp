@@ -33,8 +33,14 @@ void X9C_digital_pot::wiperUp(uint8_t num_increments)
         num_increments = WIPER_MAXIMUM;
     }
 
-    selectChip();
+    // "Mode Selection" table in datasheet on p7 shows that if Inc pin is LOW when CS is driven LOW
+    // then the wiper will move up or down according to the Up/Down pin state. So, set Up/Down pin
+    // state FIRST, and update the `_wiper_pos` and `num_increments` values accordingly
+    // right after selecting the chip!
     digitalWrite(_UP_DOWN_PIN, HIGH);
+    selectChip();
+    _wiper_pos++;
+    num_increments--;
 
     for (uint8_t i = 0; i < num_increments; i++)
     {
@@ -61,8 +67,14 @@ void X9C_digital_pot::wiperDown(uint8_t num_decrements)
         num_decrements = WIPER_MAXIMUM;
     }
 
-    selectChip();
+    // "Mode Selection" table in datasheet on p7 shows that if Inc pin is LOW when CS is driven LOW
+    // then the wiper will move up or down according to the Up/Down pin state. So, set Up/Down pin
+    // state FIRST, and update the `_wiper_pos` and `num_decrements` values accordingly
+    // right after selecting the chip!
     digitalWrite(_UP_DOWN_PIN, LOW);
+    selectChip();
+    _wiper_pos--;
+    num_decrements--;
 
     for (uint8_t i = 0; i < num_decrements; i++)
     {
