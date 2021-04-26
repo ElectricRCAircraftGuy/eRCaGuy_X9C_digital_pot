@@ -18,11 +18,15 @@ This library works on any and all Arduino or Arduino-compatible boards. Set thes
 
 # Status
 
+Done and works. 
+
 Library is done. It is complete and thorough, and it compiles and runs on an Arduino. 
 
-However, it is untested with **actual X9C103 digital potentiometer hardware**, as I'm still waiting on it to arrive in the mail. 
+<s>However, it is untested with **actual X9C103 digital potentiometer hardware**, as I'm still waiting on it to arrive in the mail.</s>
 
-Examples are written. Please take a look, try them out, and see if they work!
+Update: A friend of mine working on this [adaptivercsailing](https://github.com/adaptivercsailing/adaptivercsailing) project (and using this X9C103 device and my driver) has run my [digital_pot_2_advanced_test.ino](examples/digital_pot_2_advanced_test/digital_pot_2_advanced_test.ino) example code continually for like 10 hrs. overnight, and it ran fine the whole time. He also verified with a multimeter that the actual voltage output from digital potentiometer matched the expected value (as printed by my example code over serial), including both at the beginning and ending of the test, indicating that the code works properly to turn the relative potentiometer into an absolute potentiometer via my library. This is great news.
+
+Examples are written. Please take a look, try them out, and ensure they work!
 
 
 # License
