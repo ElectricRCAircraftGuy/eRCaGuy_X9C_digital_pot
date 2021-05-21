@@ -38,8 +38,11 @@ MIT
 [![](extras/pics/advanced_test_serial_monitor_screenshot.jpg)](extras/pics/advanced_test_serial_monitor_screenshot.jpg)
 
 
-# Notes to self
+# Notes to self / TODO
 - Reminder to follow this specification, folder layout, and to have a library.properties file or else Arduino won't accept and build your library! https://arduino.github.io/arduino-cli/latest/library-specification/ /////////////////////
+    - Restructure files...
+    - ...according to latest Arduino Library Specification: https://arduino.github.io/arduino-cli/latest/library-specification/#layout-of-folders-and-files.
+    - The library.properties files is empty, but its existence alone is enough to allow the examples to compile! :)
 
 WRITE BLOG POST ON ARDUINO LIBRARY FOLDER LAYOUT, THE ERROR MESSAGE, ETC.
 
